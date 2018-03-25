@@ -38,14 +38,14 @@ namespace BaseSetUp
 
         public ContactPage NavigateToContactPage()
         {
-            Log.Info("Navigate to ContactPage");
+            Log.Info($"Navigate to ContactPage by Link: {_navigationContactLink}");
             ClickAtWebElement(FindWebElement(_navigationContactLink));
             return new ContactPage(Driver);
         }
 
         public CasesPage NavigateToCasesPage()
         {
-            Log.Info("Navigate to CasesPage");
+            Log.Info($"Navigate to CasesPage by Link: {_navigationCasesLink}");
             ClickAtWebElement(FindWebElement(_navigationCasesLink));
             return new CasesPage(Driver);
         }
