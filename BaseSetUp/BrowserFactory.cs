@@ -49,6 +49,7 @@ namespace BaseSetUp
             var driver = new FirefoxDriver(options);
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(timeout);
             driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(timeout);
+            driver.Manage().Window.Maximize();
             return driver;
         }
     }

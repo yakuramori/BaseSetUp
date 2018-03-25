@@ -25,7 +25,7 @@ namespace BaseSetUp
         {
             var downloadLink = FindWebElement(_genericDownloadLink).GetAttribute("href");
             Log.Warn($"Full download link: {downloadLink}");
-            return downloadLink.Split(new string[] {"%2f"}, StringSplitOptions.RemoveEmptyEntries).ToList().Last();
+            return downloadLink.Split(new[] {"%2f"}, StringSplitOptions.RemoveEmptyEntries).ToList().Last();
         }
 
         public DownloadPage DownloadCustomerCase()
