@@ -6,6 +6,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.Extensions;
 using OpenQA.Selenium.Support.UI;
+#pragma warning disable 618
 
 namespace BaseSetUp
 {
@@ -33,6 +34,12 @@ namespace BaseSetUp
         {
             Log.Debug($"Wait until element {locator} is Visible for {LoadTimeout} seconds");
             _wait.Until(ExpectedConditions.ElementIsVisible(locator));
+        }
+
+        protected void WaitForElementNotVisible(By locator)
+        {
+            Log.Debug($"Wait until element {locator} is Visible for {LoadTimeout} seconds");
+            _wait.Until(ExpectedConditions.InvisibilityOfElementLocated(locator));
         }
 
         public Screenshot TakeScreenshot()
@@ -87,16 +94,26 @@ namespace BaseSetUp
         public void ClickAtWebElement(IWebElement webElement)
         {
             var action = new Actions(Driver);
-            action.MoveToElement(webElement).Click(webElement).Perform();
+            action.MoveToElement(webElement).Perform();
+            _wait.Until(ExpectedConditions.ElementToBeClickable(webElement));
+            action.Click(webElement).Perform();
         }
 
-        public void ClickAtWebElementIfPresent(By locator)
+        public void ClickAtWebElementIfVisible(By locator)
         {
             Log.Debug($"Find and click at element by: {locator}");
             var elemList = new List<IWebElement>(Driver.FindElements(locator));
             if (elemList.Count == 1)
             {
-                ClickAtWebElement(elemList.First());
+                if (elemList.First().Displayed)
+                {
+                    ClickAtWebElement(elemList.First());
+                }
+                else
+                {
+                    Log.Debug($"Found element by: {locator} but it is not visible.");
+                }
+                
             }
             else
             {

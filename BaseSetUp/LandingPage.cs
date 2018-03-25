@@ -31,7 +31,8 @@ namespace BaseSetUp
 
         public LandingPage CloseCookieFooter()
         {
-            ClickAtWebElementIfPresent(_cookieClose);
+            ClickAtWebElementIfVisible(_cookieClose);
+            WaitForElementNotVisible(_cookieClose);
             return this;
         }
     }
