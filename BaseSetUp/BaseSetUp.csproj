@@ -51,6 +51,7 @@
     <Compile Include="CasesPage.cs" />
     <Compile Include="ContactPage.cs" />
     <Compile Include="DownloadPage.cs" />
+    <Compile Include="FileUtils.cs" />
     <Compile Include="LandingPage.cs" />
     <Compile Include="NewsPage.cs" />
     <Compile Include="PrivacyPage.cs" />
