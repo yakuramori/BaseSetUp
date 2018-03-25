@@ -101,9 +101,10 @@ namespace BaseSetUp
             Assert.IsTrue(casePage.IsPageLoaded(), $"Incorrect page is opened. Was: {casePage.GetPageTitle()}");
             var downloadPage = casePage.PopulateRequestFormWith("zz@xx.com").SelectCountry("Albania").Accept().Slide().DownloadPdf();
             Assert.IsTrue(downloadPage.IsPageLoaded(), $"Incorrect page is opened. Was: {downloadPage.GetPageTitle()}");
+            var fileName = downloadPage.GetDownloadFileName();
             downloadPage.DownloadCustomerCase();
+            Assert.IsTrue(FileUtils.IfFileExistsInDownloadFolder(fileName), $"File: {fileName} is not present.");
         }
-
 
         [TearDown]
         public void TearDpwn()
